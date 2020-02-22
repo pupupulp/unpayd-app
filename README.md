@@ -1,18 +1,18 @@
-# expo-kitten-template
+# unpayd-app
 
-![contributors](https://badgen.net/github/contributors/pupupulp/expo-kitten-template)
-![stars](https://badgen.net/github/stars/pupupulp/expo-kitten-template)
-![commits](https://badgen.net/github/commits/pupupulp/expo-kitten-template)
-![last commit](https://badgen.net/github/last-commit/pupupulp/expo-kitten-template)
-[![License](https://badgen.net/github/license/pupupulp/expo-kitten-template)](https://github.com/pupupulp/expo-kitten-template/blob/master/LICENSE)
+![contributors](https://badgen.net/github/contributors/pupupulp/unpayd-app)
+![stars](https://badgen.net/github/stars/pupupulp/unpayd-app)
+![commits](https://badgen.net/github/commits/pupupulp/unpayd-app)
+![last commit](https://badgen.net/github/last-commit/pupupulp/unpayd-app)
+[![License](https://badgen.net/github/license/pupupulp/unpayd-app)](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
 
-A template for developing react-native using Expo & UI Kitten
+An opensource expense monitoring app built using Expo and UI kitten
 
 ## About
 
 ### Contributing
 
-Pull requests and stars are always welcome. For bugs and feature requests, please [create an issue](https://github.com/pupupulp/expo-kitten-template/issues/new).
+Pull requests and stars are always welcome. For bugs and feature requests, please [create an issue](https://github.com/pupupulp/unpayd-app/issues/new).
 
 ### Contributors
 
@@ -24,4 +24,4 @@ Pull requests and stars are always welcome. For bugs and feature requests, pleas
 
 ### License
 
-Copyright © 2020, [Eagan Martin](https://github.com/pupupulp). Release under the [GPL-3.0 License](https://github.com/pupupulp/expo-kitten-template/blob/master/LICENSE)
+Copyright © 2020, [Eagan Martin](https://github.com/pupupulp). Release under the [GPL-3.0 License](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
