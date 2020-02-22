@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-kitten-template",
-    "slug": "expo-kitten-template",
+    "name": "unpayd-app",
+    "slug": "unpayd-app",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,7 +24,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.pupupulp.unpayd",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.pupupulp.unpayd",
+      "versionCode": 1
     }
   }
 }
