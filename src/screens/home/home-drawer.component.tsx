@@ -40,12 +40,12 @@ export const HomeDrawer = ({ navigation }): DrawerElement => {
       <View style={styles.profileContainer}>
         <Avatar
           size='giant'
-          source={require('../../assets/images/image-splash.jpg')}
+          source={require('../../assets/images/image-avatar.jpg')}
         />
         <Text
           style={styles.profileName}
           category='h6'>
-          Test App
+          O.Deus
         </Text>
       </View>
     </Layout>
