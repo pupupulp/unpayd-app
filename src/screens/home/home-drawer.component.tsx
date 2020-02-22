@@ -39,14 +39,15 @@ export const HomeDrawer = ({ navigation }): DrawerElement => {
       level='2'>
       <View style={styles.profileContainer}>
         <Avatar
+          style={styles.logo}
           size='giant'
-          source={require('../../assets/images/image-avatar.jpg')}
+          source={require('../../assets/images/image-logo.jpg')}
         />
-        <Text
+        {/* <Text
           style={styles.profileName}
           category='h6'>
-          O.Deus
-        </Text>
+          Unpayd
+        </Text> */}
       </View>
     </Layout>
   );
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 128,
+    height: 130,
     paddingHorizontal: 16,
     justifyContent: 'center',
   },
@@ -88,7 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  logo: {
+    width: 100,
+    height: 100
+  },
   profileName: {
+    fontWeight: 'bold',
     marginHorizontal: 16,
   },
 });

@@ -53,7 +53,7 @@ export const AboutScreen = ({ navigation }): React.ReactElement => {
         <Text
           style={styles.title}
           category='s1'>
-          O.Deus 
+          Unpayd
         </Text>
         <Text
           style={styles.narrative}
