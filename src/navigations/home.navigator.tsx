@@ -1,16 +1,14 @@
  
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from 'react';
-import AboutScreen from '../screens/about';
-import { SettingsScreen } from '../screens/settings';
-import DashboardScreen from '../screens/dashboard';
+import { AboutScreen } from '../screens/about';
+import { DashboardScreen } from '../screens/dashboard';
 import { HomeDrawer } from '../screens/home/home-drawer.component';
+import { SettingsScreen } from '../screens/settings';
 
-const BottomTab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const initialRoute: string = __DEV__ ? 'Settings' : 'Settings';
+const initialRoute: string = __DEV__ ? 'Dashboard' : 'Dashboard';
 
 export const HomeNavigator = (): React.ReactElement => (
   <Drawer.Navigator

@@ -1,11 +1,33 @@
+import { Divider, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import React from 'react';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-import { mapping, light as lightTheme } from '@eva-design/eva';
+import { StyleSheet } from 'react-native';
+import { MenuIcon } from '../../components/icons';
+import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 
-const DashboardScreen = () => (
-  <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text category='h1'>HOME</Text>
-  </Layout>
-);
+export const DashboardScreen = ({ navigation }): React.ReactElement => {
 
-export default DashboardScreen;
+  const renderDrawerAction = (): React.ReactElement => (
+    <TopNavigationAction
+      icon={MenuIcon}
+      onPress={navigation.toggleDrawer}
+    />
+  );
+
+  return (
+    <SafeAreaLayout
+      style={styles.safeArea}
+      insets='top'>
+      <TopNavigation
+        title='Dashboard'
+        leftControl={renderDrawerAction()}
+      />
+      <Divider/>
+    </SafeAreaLayout>
+  );
+};
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+});
