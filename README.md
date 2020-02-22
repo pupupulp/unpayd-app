@@ -24,4 +24,4 @@ Pull requests and stars are always welcome. For bugs and feature requests, pleas
 
 ### License
 
-Copyright © 2020, [Eagan Martin](https://github.com/pupupulp). Release under the [GPL-3.0 License](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
+Copyright © 2020, [Eagan Martin](https://github.com/pupupulp). Release under the [The Unlicense](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
