@@ -93,7 +93,7 @@ export const ThemesSection = (): React.ReactElement => {
         message='Please restart application to apply settings.'
         visible={restartModalVisible}
         onBackdropPress={toggleRestartModal}
-        onGotItButtonPress={toggleRestartModal}
+        onConfirmPress={toggleRestartModal}
       />
     </SafeAreaLayout>
   );

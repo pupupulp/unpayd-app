@@ -4,19 +4,19 @@ import { StyleSheet } from 'react-native';
 
 interface ConfirmModalProps extends Omit<ModalProps, 'children'> {
   message: string;
-  onGotItButtonPress: () => void;
+  onConfirmPress: () => void;
 }
 
 export const ConfirmModal = (props: ConfirmModalProps): React.ReactElement => {
 
-  const { message, onGotItButtonPress, ...modalProps } = props;
+  const { message, onConfirmPress, ...modalProps } = props;
 
   return (
     <Modal
       backdropStyle={styles.backdrop}
       {...modalProps}>
       <Layout style={styles.container}>
-        <Text category='h4'>
+        <Text category='h6'>
           System Message
         </Text>
         <Text
@@ -26,8 +26,8 @@ export const ConfirmModal = (props: ConfirmModalProps): React.ReactElement => {
           {message}
         </Text>
         <Button
-          onPress={onGotItButtonPress}>
-          GOT IT
+          onPress={onConfirmPress}>
+          OK
         </Button>
       </Layout>
     </Modal>
@@ -37,11 +37,11 @@ export const ConfirmModal = (props: ConfirmModalProps): React.ReactElement => {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 4,
-    padding: 16,
+    padding: 18,
     width: 320,
   },
   description: {
-    marginTop: 8,
+    marginTop: 18,
     marginBottom: 24,
   },
   backdrop: {
