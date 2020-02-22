@@ -17,3 +17,7 @@ export const SettingsIcon = (style: ImageStyle): IconElement => (
 export const MenuIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='menu-outline'/>
 );
+
+export const GithubIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} name='github-outline'/>
+);
