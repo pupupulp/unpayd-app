@@ -6,7 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SplashImage } from '../components/splash-image.component';
 import { StatusBar } from '../components/status-bar.component';
 import { AppNavigator } from '../navigations/app.navigator';
-import { AppStorage } from '../services/storage.service';
+import { AppStorage } from '../services/app-storage.service';
 import { Theme, ThemeMapping, Theming } from '../services/theme.service';
 import { AppLoading, LoadFontsTask, Task } from './app-loading.component';
 import { appThemeMappings, appThemes } from './themes';

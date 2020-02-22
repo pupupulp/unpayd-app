@@ -1,6 +1,6 @@
 import React from 'react';
 import { Appearance, AppearancePreferences, ColorSchemeName } from 'react-native-appearance';
-import { AppStorage } from './storage.service';
+import { AppStorage } from './app-storage.service';
 
 export type ThemeMapping = 'eva' | 'material';
 export type Theme = 'light' | 'dark' | 'brand';
