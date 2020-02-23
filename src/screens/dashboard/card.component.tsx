@@ -1,10 +1,11 @@
-import { Card, CardElement, CardProps, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { Card, CardElement, CardProps, StyleService, Text, useStyleSheet, Button } from '@ui-kitten/components';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import React from 'react';
 import { View, ViewProps } from 'react-native';
 import { ExpenseTransaction } from './types';
 import { ExpenseGraph } from './graph.component';
+import { SquarePlusIcon } from '../../components/icons';
 
 export interface ExpenseCardProps extends Omit<CardProps, 'children'> {
   name: string;
@@ -37,6 +38,7 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
         category='s2'>
         {accountNo}
       </Text>
+      <Button style={{ justifyContent: 'flex-end' }} status='warning' size='small' appearance='ghost' icon={SquarePlusIcon}/>
     </View>
   );
 

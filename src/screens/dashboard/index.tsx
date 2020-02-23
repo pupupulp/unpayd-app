@@ -1,10 +1,12 @@
-import { Divider, TopNavigation, TopNavigationAction, ThemeProvider, List } from '@ui-kitten/components';
+import { Divider, TopNavigation, TopNavigationAction, ThemeProvider, List, Button, Layout } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, ListRenderItemInfo } from 'react-native';
 import { MenuIcon } from '../../components/icons';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { Expense } from './types';
 import { ExpenseCard } from './card.component';
+import { SquarePlusIcon } from '../../components/icons';
+import { AddExpenseModal } from './add-expense.component';
 
 export const DashboardScreen = ({ navigation }): React.ReactElement => {
 
@@ -86,6 +88,16 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
     />
   );
 
+  const [restartModalVisible, setRestartModalVisible] = React.useState<boolean>(false);
+
+  const toggleRestartModal = (): void => {
+    setRestartModalVisible(!restartModalVisible);
+  };
+
+  const showNewExpenseForm = () => {
+    setRestartModalVisible(true);
+  };
+
   return (
     <SafeAreaLayout
       style={styles.safeArea}
@@ -95,11 +107,25 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
         leftControl={renderDrawerAction()}
       />
       <Divider/>
+      <Layout level='3'>
+        <Button 
+          style={{ justifyContent: 'flex-end' }} 
+          status='warning' 
+          appearance='ghost' 
+          icon={SquarePlusIcon}
+          onPress={showNewExpenseForm}>
+          ADD NEW EXPENSE
+        </Button>
+      </Layout>
+      <Divider/>
       <List
         contentContainerStyle={styles.container}
         data={expenses}
         renderItem={renderItem}
       />
+      <AddExpenseModal 
+        visible={restartModalVisible}
+        onBackdropPress={toggleRestartModal}/>
     </SafeAreaLayout>
   );
 };
