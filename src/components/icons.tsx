@@ -25,3 +25,7 @@ export const GithubIcon = (style: ImageStyle): IconElement => (
 export const SquarePlusIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='plus-square-outline'/>
 );
+
+export const CalendarIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} name='calendar-outline'/>
+);

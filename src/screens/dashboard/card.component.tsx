@@ -6,6 +6,7 @@ import { View, ViewProps } from 'react-native';
 import { ExpenseTransaction } from './types';
 import { ExpenseGraph } from './graph.component';
 import { SquarePlusIcon } from '../../components/icons';
+import { AddExpenseLineModal } from './add-expense-line.component';
 
 export interface ExpenseCardProps extends Omit<CardProps, 'children'> {
   name: string;
@@ -38,7 +39,12 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
         category='s2'>
         {accountNo}
       </Text>
-      <Button style={{ justifyContent: 'flex-end' }} status='warning' size='small' appearance='ghost' icon={SquarePlusIcon}/>
+      <Button style={{ justifyContent: 'flex-end' }} 
+        status='warning' 
+        size='small' 
+        appearance='ghost' 
+        icon={SquarePlusIcon}
+        onPress={showNewExpenseLineForm}/>
     </View>
   );
 
@@ -48,6 +54,16 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
     if (withCurrency) currency = { style: 'currency', currency: 'PHP' };
 
     return new Intl.NumberFormat('en-PH', currency).format(amount)
+  };
+
+  const [restartModalVisible, setRestartModalVisible] = React.useState<boolean>(false);
+
+  const toggleRestartModal = (): void => {
+    setRestartModalVisible(!restartModalVisible);
+  };
+
+  const showNewExpenseLineForm = () => {
+    setRestartModalVisible(true);
   };
 
   const renderFooter = (): React.ReactElement<ViewProps> => (
@@ -72,6 +88,9 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
       <ExpenseGraph
         transactions={transactions}
       />
+      <AddExpenseLineModal 
+        visible={restartModalVisible}
+        onBackdropPress={toggleRestartModal}/>
     </Card>
   );
 };

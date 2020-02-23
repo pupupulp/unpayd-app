@@ -7,6 +7,7 @@ import { Expense } from './types';
 import { ExpenseCard } from './card.component';
 import { SquarePlusIcon } from '../../components/icons';
 import { AddExpenseModal } from './add-expense.component';
+import { AddExpenseLineModal } from './add-expense-line.component';
 
 export const DashboardScreen = ({ navigation }): React.ReactElement => {
 
