@@ -53,7 +53,14 @@ export const AddExpenseModal = (props: AddExpenseModalProps): React.ReactElement
         />
         <Button
           style={{ marginTop: 20 }}
-          onPress={() => onConfirmPress(expenseName, accountNo, actualAmount)}>
+          onPress={() => {
+            if (isNotEmptyExpenseName && isNotEmptyActualAmount) {
+              onConfirmPress(expenseName, accountNo, actualAmount);
+              setExpenseName('');
+              setAccountNo('');
+              setActualAmount('');
+            }
+          }}>
           OK
         </Button>
       </Layout>

@@ -77,26 +77,27 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
     });
 
     updateExpenses(expenses);
+    toggleRestartModal();
   };
 
   getExpenses();
 
-  if (!expenses.length) {
-    setExpenses([
-      {
-        name: 'Empty',
-        accountNo: '',
-        targetAmount: 0,
-        transactions: [
-          {
-            month: new Date(2020, 0, 1).getMonth(),
-            amount: 0,
-          },
-        ],
-        predictions: []
-      }
-    ]);
-  }
+  // if (!expenses.length) {
+    // setExpenses([
+    //   {
+    //     name: 'Empty',
+    //     accountNo: '',
+    //     targetAmount: 0,
+    //     transactions: [
+    //       {
+    //         month: new Date(2020, 0, 1).getMonth(),
+    //         amount: 0,
+    //       },
+    //     ],
+    //     predictions: []
+    //   }
+    // ]);
+  // }
 
   return (
     <SafeAreaLayout
@@ -110,7 +111,7 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
       <Layout level='3'>
         <Button 
           style={{ justifyContent: 'flex-end' }} 
-          status='warning' 
+          status='primary' 
           appearance='ghost' 
           icon={SquarePlusIcon}
           onPress={showNewExpenseForm}>

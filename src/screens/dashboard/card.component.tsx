@@ -1,10 +1,11 @@
-import { Button, Card, CardElement, CardProps, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { Button, Card, CardElement, CardProps, Layout, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import React from 'react';
 import { View, ViewProps } from 'react-native';
-import { SquarePlusIcon } from '../../components/icons';
+import { SquarePlusIcon, SquareMinusIcon, TrashIcon } from '../../components/icons';
 import { AddExpenseLineModal } from './add-expense-line.component';
+import { ConfirmModal } from '../../components/confirm-modal.component';
 import { ExpenseGraph } from './graph.component';
 import { ExpenseTransaction } from './types';
 import { Expense } from './types';
@@ -26,31 +27,57 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
   let predictedExpense = 0;
 
   if (transactionAmounts.length) {
-    predictedExpense = transactionAmounts.reduce((total, record) => { return total + record });
-    predictedExpense /= transactionAmounts.length;
+    predictedExpense = transactionAmounts.reduce((total, record) => { 
+      total = total ? total : 0;
+      return total + record; 
+    });
+    predictedExpense /= (transactionAmounts.length - 1);
   } else {
     return null;
   }
 
+  const [expenseDeletionModalVisible, setExpenseDeletionModalVisible] = React.useState<boolean>(false);
+
+  const toggleExpenseDeletionModal = (): void => {
+    setExpenseDeletionModalVisible(!expenseDeletionModalVisible);
+  };
+
   const renderHeader = (): React.ReactElement<ViewProps> => (
     <View style={styles.header}>
-      <Text
-        style={styles.expenseName} 
-        category='s1'>
-        {name}
-      </Text>
-      <Text 
-        appearance='hint'
-        style={styles.expenseAccountNo}
-        category='s2'>
-        {accountNo}
-      </Text>
-      <Button style={{ justifyContent: 'flex-end' }} 
-        status='warning' 
-        size='small' 
-        appearance='ghost' 
-        icon={SquarePlusIcon}
-        onPress={showNewExpenseLineForm}/>
+      <Layout style={{ justifyContent:'flex-end', flexDirection:'column'}}>
+        <Text
+          style={styles.expenseName} 
+          category='s1'>
+          {name}
+        </Text>
+        <Text 
+          appearance='hint'
+          style={styles.expenseAccountNo}
+          category='s2'>
+          {accountNo}
+        </Text>
+      </Layout>
+      
+      <Layout style={{ justifyContent:'flex-end', flexDirection:'row'}}>
+        <Button  
+          status='danger' 
+          size='small' 
+          appearance='ghost' 
+          icon={TrashIcon}
+          onPress={toggleExpenseDeletionModal}/>
+        <Button  
+          status='primary' 
+          size='small' 
+          appearance='ghost' 
+          icon={SquarePlusIcon}
+          onPress={showNewExpenseLineForm}/>
+      </Layout>
+      <ConfirmModal
+        message='Are you sure you want to remove expense record ?'
+        visible={expenseDeletionModalVisible}
+        onBackdropPress={toggleExpenseDeletionModal}
+        onConfirmPress={removeExpense}
+      />
     </View>
   );
 
@@ -105,6 +132,16 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
     await AppStorage.setExpenses(expenses).then(() => console.log('Success'));
   }
 
+  const removeExpense = () => {
+    getExpenses().then((result) => {
+      let filtered = result.filter(function(record) { return record.name != name || record.accountNo != accountNo }); 
+
+      updateExpenses(filtered);
+    });
+
+    toggleExpenseDeletionModal();
+  };
+
   const addNewExpenseTransaction = (date, amount) => {
     transactions.push({
       month: new Date(date).getMonth(),
@@ -123,6 +160,7 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
       });
 
       updateExpenses(filtered);
+      toggleRestartModal();
     });
   };
   

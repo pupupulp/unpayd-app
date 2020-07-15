@@ -11,12 +11,11 @@ export const AddExpenseLineModal = (props: AddExpenseLineModalProps): React.Reac
 
   const { onConfirmPress, ...modalProps } = props;
 
-  // const [amount, SetAmount] = React.useState('');
-  const [amount, SetAmount] = React.useState<string>();
-  const isNotEmpty = amount && amount.length > 0;
-
   const [date, setDate] = React.useState<string>();
   const isNotEmptyDate = date && date.length > 0;
+
+  const [amount, setAmount] = React.useState<string>();
+  const isNotEmptyAmount = amount && amount.length > 0;
 
   return (
     <Modal
@@ -38,14 +37,20 @@ export const AddExpenseLineModal = (props: AddExpenseLineModalProps): React.Reac
         <Input
           style={{ marginTop: 10 }}
           placeholder='Amount (0.00)'
-          status={isNotEmpty ? 'success' : 'danger'}
-          caption={isNotEmpty ? '' : 'Can not be empty'}
+          status={isNotEmptyAmount ? 'success' : 'danger'}
+          caption={isNotEmptyAmount ? '' : 'Can not be empty'}
           value={amount}
-          onChangeText={SetAmount}
+          onChangeText={setAmount}
         />
         <Button
           style={{ marginTop: 20 }}
-          onPress={() => onConfirmPress(date, amount)}>
+          onPress={() => {
+            if (isNotEmptyDate && isNotEmptyAmount) {
+              onConfirmPress(date, amount);
+              setDate('');
+              setAmount('');
+            }
+          }}>
           OK
         </Button>
       </Layout>

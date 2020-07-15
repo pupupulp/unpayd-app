@@ -26,6 +26,14 @@ export const SquarePlusIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='plus-square-outline'/>
 );
 
+export const SquareMinusIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} name='minus-square-outline'/>
+);
+
+export const TrashIcon = (style: ImageStyle): IconElement => (
+  <Icon {...style} name='trash-2-outline'/>
+);
+
 export const CalendarIcon = (style: ImageStyle): IconElement => (
   <Icon {...style} name='calendar-outline'/>
 );
