@@ -22,7 +22,7 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
   const styles = useStyleSheet(themedStyles);
   const { name, accountNo, targetAmount, transactions, predictions, ...cardProps } = props;
   
-  const transactionAmounts = transactions.map(record => { if (record.amount > 0 ) return record.amount });
+  let transactionAmounts = transactions.map(record => { if (record.amount > 0 ) return record.amount });
   let predictedExpense = 0;
 
   if (transactionAmounts.length) {
@@ -98,9 +98,7 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
   let [expenses, setExpenses] = React.useState<Expense[]>([emptyExpense]);
 
   const getExpenses = async () => {
-    await AppStorage.getExpenses([emptyExpense]).then(result => {
-      setExpenses(result);
-    });
+    return await AppStorage.getExpenses([emptyExpense]);
   };
 
   let updateExpenses = async (expenses) => {
@@ -113,18 +111,19 @@ export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
       amount: Number(amount)
     });
 
-    getExpenses();
+    getExpenses().then((result) => {
+      let filtered = result.filter(function(record) { return record.name != name || record.accountNo != accountNo }); 
+      
+      filtered.push({
+        name,
+        accountNo,
+        targetAmount,
+        transactions,
+        predictions
+      });
 
-    let filtered = expenses.filter(function(record) { return record.name != name && record.accountNo != accountNo }); 
-    filtered.push({
-      name,
-      accountNo,
-      targetAmount,
-      transactions,
-      predictions
+      updateExpenses(filtered);
     });
-
-    updateExpenses(filtered);
   };
   
   return (
