@@ -3,11 +3,18 @@ import React from 'react';
 import { FlexStyle, View, ViewProps } from 'react-native';
 import { EdgeInsets, SafeAreaConsumer } from 'react-native-safe-area-context';
 
-interface InsetProvider {
+type Inset = 'top' | 'bottom';
+
+interface IInsetProvider {
   toStyle: (insets: EdgeInsets, styles) => FlexStyle;
 }
 
-const INSETS: Record<string, InsetProvider> = {
+export interface ISafeAreaLayoutProps extends ViewProps, StyledComponentProps {
+  insets?: Inset;
+  children?: React.ReactNode;
+}
+
+const INSETS: Record<string, IInsetProvider> = {
   top: {
     toStyle: (insets: EdgeInsets, styles): FlexStyle => ({
       ...styles,
@@ -22,15 +29,7 @@ const INSETS: Record<string, InsetProvider> = {
   },
 };
 
-type Inset = 'top' | 'bottom';
-
-export interface SafeAreaLayoutProps extends ViewProps, StyledComponentProps {
-  insets?: Inset;
-  children?: React.ReactNode;
-}
-
-export class SafeAreaLayoutComponent extends React.Component<SafeAreaLayoutProps> {
-
+export class SafeAreaLayoutComponent extends React.Component<ISafeAreaLayoutProps> {
   static styledComponentName: string = 'SafeAreaLayout';
 
   public render(): React.ReactElement<ViewProps> {

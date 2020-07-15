@@ -1,4 +1,4 @@
-import { Text, List, ThemeProvider, Toggle } from '@ui-kitten/components';
+import { List, Text, ThemeProvider, Toggle } from '@ui-kitten/components';
 import React from 'react';
 import { ListRenderItemInfo, StyleSheet } from 'react-native';
 import { appThemes } from '../../../app/themes';

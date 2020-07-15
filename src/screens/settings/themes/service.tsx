@@ -1,4 +1,4 @@
-import { ThemeMapping, Theme } from '../../../services/theme.service';
+import { Theme, ThemeMapping } from '../../../services/theme.service';
 import { ThemeItem } from './types';
 
 export class ThemesService {

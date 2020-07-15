@@ -1,93 +1,56 @@
-import { Divider, TopNavigation, TopNavigationAction, ThemeProvider, List, Button, Layout } from '@ui-kitten/components';
+import { Button, Divider, Layout, List, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import React from 'react';
-import { StyleSheet, ListRenderItemInfo } from 'react-native';
-import { MenuIcon } from '../../components/icons';
+import { ListRenderItemInfo, StyleSheet } from 'react-native';
+import { MenuIcon, SquarePlusIcon } from '../../components/icons';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
-import { Expense } from './types';
-import { ExpenseCard } from './card.component';
-import { SquarePlusIcon } from '../../components/icons';
 import { AddExpenseModal } from './add-expense.component';
-import { AddExpenseLineModal } from './add-expense-line.component';
+import { ExpenseCard } from './card.component';
+import { Expense } from './types';
+import { AppStorage } from '../../services/app-storage.service';
 
 export const DashboardScreen = ({ navigation }): React.ReactElement => {
+  const emptyExpense = {
+    name: '',
+    accountNo: '',
+    targetAmount: 0,
+    transactions: [],
+    predictions: []
+  };
 
-  const expenses: Expense[] = [
-    { 
-      name: 'Test 1',
-      accountNo: '#123456',
-      targetAmount: 1200,
-      transactions: [
-        {
-          month: new Date(2020, 0, 1).getMonth(),
-          amount: 13840,
-        },
-        {
-          month: new Date(2020, 1, 1).getMonth(),
-          amount: 1600,
-        },
-        {
-          month: new Date(2020, 2, 1).getMonth(),
-          amount: 640,
-        },
-        {
-          month: new Date(2020, 3, 1).getMonth(),
-          amount: 3320,
-        },
-        {
-          month: new Date(2020, 4, 1).getMonth(),
-          amount: 3320,
-        },
-        {
-          month: new Date(2020, 5, 1).getMonth(),
-          amount: 3320,
-        },
-        {
-          month: new Date(2020, 6, 1).getMonth(),
-          amount: 3310,
-        },
-      ],
-      predictions: [],
-    },
-    { 
-      name: 'Test 2',
-      accountNo: '#654321',
-      targetAmount: 1200,
-      transactions: [
-        {
-          month: new Date(2020, 1, 1).getMonth(),
-          amount: 1600,
-        },
-        {
-          month: new Date(2020, 2, 1).getMonth(),
-          amount: 640,
-        },
-        {
-          month: new Date(2020, 3, 1).getMonth(),
-          amount: 3320,
-        },
-      ],
-      predictions: [],
-    },
-  ];
+  let [expenses, setExpenses] = React.useState<Expense[]>([emptyExpense]);
 
-  const renderDrawerAction = (): React.ReactElement => (
-    <TopNavigationAction
-      icon={MenuIcon}
-      onPress={navigation.toggleDrawer}
-    />
-  );
+  const getExpenses = async () => {
+    await AppStorage.getExpenses([emptyExpense]).then(result => {
+      setExpenses(result);
+    });
+  };
+
+  let updateExpenses = async (expenses) => {
+    await AppStorage.setExpenses(expenses).then(() => console.log('Success'));
+  }
+
+  const renderDrawerAction = (): React.ReactElement => {
+    return (
+      <TopNavigationAction
+        icon={MenuIcon}
+        onPress={navigation.toggleDrawer}
+      />
+    )
+  };
 
   const onExpensePress = (info: ListRenderItemInfo<Expense>): void => {
     // render expense full view
   };
 
-  const renderItem = (info: ListRenderItemInfo<Expense>): React.ReactElement => (
-    <ExpenseCard
-      style={styles.item}
-     {...info.item}
-      // onPress={() => onExpensePress(info)}
-    />
-  );
+  const renderItem = (info: ListRenderItemInfo<Expense>): React.ReactElement => {
+    return (
+      <ExpenseCard
+        style={styles.item}
+       {...info.item}
+        // onPress={() => onExpensePress(info)}
+      />
+    );
+  }
 
   const [restartModalVisible, setRestartModalVisible] = React.useState<boolean>(false);
 
@@ -98,6 +61,42 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
   const showNewExpenseForm = () => {
     setRestartModalVisible(true);
   };
+
+  const addNewExpense = (expenseName, accountNo, actualAmount) => {
+    expenses.push({
+      name: expenseName,
+      accountNo: accountNo,
+      targetAmount: actualAmount,
+      transactions: [
+        {
+          month: new Date().getMonth(),
+          amount: 0,
+        },
+      ],
+      predictions: []
+    });
+
+    updateExpenses(expenses);
+  };
+
+  getExpenses();
+
+  if (!expenses.length) {
+    setExpenses([
+      {
+        name: 'Empty',
+        accountNo: '',
+        targetAmount: 0,
+        transactions: [
+          {
+            month: new Date(2020, 0, 1).getMonth(),
+            amount: 0,
+          },
+        ],
+        predictions: []
+      }
+    ]);
+  }
 
   return (
     <SafeAreaLayout
@@ -126,9 +125,11 @@ export const DashboardScreen = ({ navigation }): React.ReactElement => {
       />
       <AddExpenseModal 
         visible={restartModalVisible}
-        onBackdropPress={toggleRestartModal}/>
+        onBackdropPress={toggleRestartModal}
+        onConfirmPress={addNewExpense}/>
     </SafeAreaLayout>
   );
+  
 };
 
 const styles = StyleSheet.create({

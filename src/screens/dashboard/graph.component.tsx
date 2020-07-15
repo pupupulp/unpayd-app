@@ -6,14 +6,12 @@ import { Dimensions, View } from 'react-native';
 import { LineChart } from "react-native-chart-kit";
 import { ExpenseTransaction } from './types';
 
-export interface ExpenseGraphProps {
+export interface IExpenseGraphProps {
   transactions: Array<ExpenseTransaction>;
 }
 
-export const ExpenseGraph = (props: ExpenseGraphProps): ReactElement => {
-
+export const ExpenseGraph = (props: IExpenseGraphProps): ReactElement => {
   const styles = useStyleSheet(themedStyles);
-
   const { transactions } = props;
 
   let startIndex = 0;
@@ -26,6 +24,8 @@ export const ExpenseGraph = (props: ExpenseGraphProps): ReactElement => {
   
   const renderCurrency = (amount, withCurrency = false): string => {
     let currency = {}
+
+    if (!amount) amount = 0;
 
     if (withCurrency) currency = { style: 'currency', currency: 'PHP' };
 
@@ -47,7 +47,7 @@ export const ExpenseGraph = (props: ExpenseGraphProps): ReactElement => {
       }
     ],
   };
-
+  
   const chartConfig = {
     backgroundGradientFrom: '#E0009D',
     backgroundGradientFromOpacity: 0,

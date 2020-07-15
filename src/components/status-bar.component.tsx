@@ -1,10 +1,6 @@
-import React from 'react';
-import {
-  StatusBar as RNStatusBar,
-  StatusBarProps as RNStatusBarProps,
-  ViewProps,
-} from 'react-native';
 import { styled, StyledComponentProps } from '@ui-kitten/components';
+import React from 'react';
+import { StatusBar as RNStatusBar, StatusBarProps as RNStatusBarProps, ViewProps } from 'react-native';
 
 export type StatusBarProps = RNStatusBarProps & StyledComponentProps;
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Animated, Easing, ImageProps, StyleSheet } from 'react-native';
 
-export interface LoadingAnimationProps extends ImageProps {
+export interface ILoadingAnimationProps extends ImageProps {
   loading: boolean;
 }
 
 const animationValue: Animated.Value = new Animated.Value(0);
 
-export const SplashImage = (props: LoadingAnimationProps): React.ReactElement | undefined => {
+export const SplashImage = (props: ILoadingAnimationProps): React.ReactElement | undefined => {
 
   const [animationCompleted, setAnimationCompleted] = React.useState<boolean>(false);
 

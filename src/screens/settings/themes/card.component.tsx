@@ -2,12 +2,12 @@ import { Card, CardElement, CardProps, StyleService, Text, useStyleSheet } from 
 import React from 'react';
 import { View, ViewProps, ViewStyle } from 'react-native';
 
-export interface ThemeCardProps extends Omit<CardProps, 'children'> {
+export interface IThemeCardProps extends Omit<CardProps, 'children'> {
   title: string;
   isActive: boolean;
 }
 
-export const ThemeCard = (props: ThemeCardProps): CardElement => {
+export const ThemeCard = (props: IThemeCardProps): CardElement => {
 
   const styles = useStyleSheet(themedStyles);
 

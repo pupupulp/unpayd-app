@@ -1,5 +1,5 @@
-import React from 'react';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import React from 'react';
 import { HomeNavigator } from './home.navigator';
 
 const navigatorTheme = {

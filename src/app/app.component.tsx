@@ -29,7 +29,7 @@ const App = ({ mapping, theme }): React.ReactElement => {
 
   const [themeMappingContext, currentThemeMapping] = Theming.useMapping(appThemeMappings, mapping);
   const [themeContext, currentTheme] = Theming.useTheming(appThemes, mapping, theme);
-
+  
   return (
     <React.Fragment>
       <IconRegistry icons={[EvaIconsPack]}/>
@@ -39,7 +39,7 @@ const App = ({ mapping, theme }): React.ReactElement => {
             <Theming.ThemeContext.Provider value={themeContext}>
               <SafeAreaProvider>
                 <StatusBar/>
-                <AppNavigator/>
+                <AppNavigator />
               </SafeAreaProvider>
             </Theming.ThemeContext.Provider>
           </Theming.ThemeMappingContext.Provider>

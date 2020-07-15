@@ -1,7 +1,7 @@
-import { Avatar, Divider, Layout, Text, TopNavigation, TopNavigationAction, List, ListItem, Button } from '@ui-kitten/components';
+import { Avatar, Button, Divider, Layout, Text, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { MenuIcon, GithubIcon } from '../../components/icons';
+import { StyleSheet } from 'react-native';
+import { GithubIcon, MenuIcon } from '../../components/icons';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { WebBrowserService } from '../../services/web-browser.service';
 

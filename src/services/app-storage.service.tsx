@@ -1,5 +1,6 @@
 import { AsyncStorage, YellowBox } from 'react-native';
 import { ThemeMapping, Theme } from './theme.service';
+import { Expense } from './expense.service';
 
 const THEME_MAPPING_KEY: string = 'theme_mapping';
 const THEME_KEY: string = 'theme';
@@ -8,14 +9,14 @@ const EXPENSE_KEY: string = 'expenses';
 
 export class AppStorage {
 
-  static getExpenses = (fallback?: string): Promise<string> => {
+  static getExpenses = (fallback?: Array<Expense>): Promise<Array<Expense>> => {
     return AsyncStorage.getItem(EXPENSE_KEY).then((expenses: string) => {
-      return expenses || fallback;
+      return JSON.parse(expenses) || fallback;
     })
   };
 
-  static setExpenses = (expenses: string): Promise<void> => {
-    return AsyncStorage.setItem(EXPENSE_KEY, expenses);
+  static setExpenses = (expenses: Array<Expense>): Promise<void> => {
+    return AsyncStorage.setItem(EXPENSE_KEY, JSON.stringify(expenses));
   };
 
   static getThemeMapping = (fallback?: ThemeMapping): Promise<ThemeMapping> => {

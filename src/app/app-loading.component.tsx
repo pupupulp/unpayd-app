@@ -3,10 +3,10 @@ import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React from 'react';
 
-type TaskResult = [string, any];
+export type TaskResult = [string, any];
 export type Task = () => Promise<TaskResult | null>;
 
-export interface ApplicationLoaderProps {
+export interface IApplicationLoaderProps {
   tasks?: Task[];
   initialConfig?: Record<string, any>;
   placeholder?: (props: { loading: boolean }) => React.ReactElement;
@@ -25,26 +25,9 @@ export const LoadAssetsTask = (assets: number[]): Promise<TaskResult> => {
   return Promise.all(tasks).then(() => null);
 };
 
-/*
- * Prevent splash screen from hiding since it is controllable by AppLoading component.
- */
 SplashScreen.preventAutoHide();
 
-/**
- * Loads application configuration and returns content of the application when done.
- *
- * @property {Task[]} tasks - Array of tasks to prepare application before it's loaded.
- * A single task should return a Promise with value and a by which this value is accessible.
- *
- * @property {any} fallback - Fallback configuration that is used as default application configuration.
- * May be useful at first run.
- *
- * @property {(props: { loaded: boolean }) => React.ReactElement} placeholder - Element to render
- * while application is loading.
- *
- * @property {(result: any) => React.ReactElement} children - Should return Application component
- */
-export const AppLoading = (props: ApplicationLoaderProps): React.ReactElement => {
+export const AppLoading = (props: IApplicationLoaderProps): React.ReactElement => {
 
   const [loading, setLoading] = React.useState<boolean>(true);
   const loadingResult = props.initialConfig || {};
@@ -68,6 +51,7 @@ export const AppLoading = (props: ApplicationLoaderProps): React.ReactElement =>
     if (props.tasks) {
       return Promise.all(props.tasks.map(createRunnableTask));
     }
+    
     return Promise.resolve();
   };
 

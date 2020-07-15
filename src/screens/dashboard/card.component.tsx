@@ -1,14 +1,16 @@
-import { Card, CardElement, CardProps, StyleService, Text, useStyleSheet, Button } from '@ui-kitten/components';
+import { Button, Card, CardElement, CardProps, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import React from 'react';
 import { View, ViewProps } from 'react-native';
-import { ExpenseTransaction } from './types';
-import { ExpenseGraph } from './graph.component';
 import { SquarePlusIcon } from '../../components/icons';
 import { AddExpenseLineModal } from './add-expense-line.component';
+import { ExpenseGraph } from './graph.component';
+import { ExpenseTransaction } from './types';
+import { Expense } from './types';
+import { AppStorage } from '../../services/app-storage.service';
 
-export interface ExpenseCardProps extends Omit<CardProps, 'children'> {
+export interface IExpenseCardProps extends Omit<CardProps, 'children'> {
   name: string;
   accountNo: string;
   targetAmount: number;
@@ -16,15 +18,19 @@ export interface ExpenseCardProps extends Omit<CardProps, 'children'> {
   predictions: Array<ExpenseTransaction>;
 }
 
-export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
-
+export const ExpenseCard = (props: IExpenseCardProps): CardElement => {
   const styles = useStyleSheet(themedStyles);
-
   const { name, accountNo, targetAmount, transactions, predictions, ...cardProps } = props;
   
-  const transactionAmounts = transactions.map(record => { return record.amount });
-  let predictedExpense = transactionAmounts.reduce((total, record) => { return total + record });
-  predictedExpense /= transactionAmounts.length;
+  const transactionAmounts = transactions.map(record => { if (record.amount > 0 ) return record.amount });
+  let predictedExpense = 0;
+
+  if (transactionAmounts.length) {
+    predictedExpense = transactionAmounts.reduce((total, record) => { return total + record });
+    predictedExpense /= transactionAmounts.length;
+  } else {
+    return null;
+  }
 
   const renderHeader = (): React.ReactElement<ViewProps> => (
     <View style={styles.header}>
@@ -50,6 +56,8 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
 
   const renderCurrency = (amount, withCurrency = false): string => {
     let currency = {}
+
+    if (!amount) amount = 0;
 
     if (withCurrency) currency = { style: 'currency', currency: 'PHP' };
 
@@ -79,6 +87,45 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
     </View>
   );
 
+  const emptyExpense = {
+    name: '',
+    accountNo: '',
+    targetAmount: 0,
+    transactions: [],
+    predictions: []
+  };
+
+  let [expenses, setExpenses] = React.useState<Expense[]>([emptyExpense]);
+
+  const getExpenses = async () => {
+    await AppStorage.getExpenses([emptyExpense]).then(result => {
+      setExpenses(result);
+    });
+  };
+
+  let updateExpenses = async (expenses) => {
+    await AppStorage.setExpenses(expenses).then(() => console.log('Success'));
+  }
+
+  const addNewExpenseTransaction = (date, amount) => {
+    transactions.push({
+      month: new Date(date).getMonth(),
+      amount: Number(amount)
+    });
+
+    getExpenses();
+
+    let filtered = expenses.filter(function(record) { return record.name != name && record.accountNo != accountNo }); 
+    filtered.push({
+      name,
+      accountNo,
+      targetAmount,
+      transactions,
+      predictions
+    });
+
+    updateExpenses(filtered);
+  };
   
   return (
     <Card
@@ -90,7 +137,8 @@ export const ExpenseCard = (props: ExpenseCardProps): CardElement => {
       />
       <AddExpenseLineModal 
         visible={restartModalVisible}
-        onBackdropPress={toggleRestartModal}/>
+        onBackdropPress={toggleRestartModal}
+        onConfirmPress={addNewExpenseTransaction}/>
     </Card>
   );
 };

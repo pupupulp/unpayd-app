@@ -1,7 +1,7 @@
-import { Avatar, Divider, Drawer, DrawerElement, DrawerHeaderElement, DrawerHeaderFooter, DrawerHeaderFooterElement, Layout, MenuItemType, Text } from '@ui-kitten/components';
+import { Avatar, Divider, Drawer, DrawerElement, DrawerHeaderElement, DrawerHeaderFooter, DrawerHeaderFooterElement, Layout, MenuItemType } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { DashboardIcon, SettingsIcon, AboutIcon } from '../../components/icons';
+import { AboutIcon, DashboardIcon, SettingsIcon } from '../../components/icons';
 import { SafeAreaLayout } from '../../components/safe-area-layout.component';
 import { AppInfoService } from '../../services/app-info.service';
 
@@ -43,11 +43,6 @@ export const HomeDrawer = ({ navigation }): DrawerElement => {
           size='giant'
           source={require('../../assets/images/image-logo.jpg')}
         />
-        {/* <Text
-          style={styles.profileName}
-          category='h6'>
-          Unpayd
-        </Text> */}
       </View>
     </Layout>
   );
