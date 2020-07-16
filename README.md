@@ -8,6 +8,10 @@
 
 An opensource expense monitoring app built using Expo and UI kitten
 
+## Release
+
+Latest Release: [Download](https://github.com/pupupulp/unpayd-app/raw/master/unpayd-app-d6e84e155bed4a6b90196fed800d9831-signed.apk)
+
 ## About
 
 ### Contributing
