@@ -77,14 +77,14 @@ $ git push
    - For resolving issues
       - issue-<#>-<description>
    - For introducing new feature
-      - feature-<description>
+      - feat-<description>
    - For minor fixes such as typos
       - chore-<description>
   
 ```
 # Branches are only a sample
 $ git checkout -b issue-1-memory-leak-fix
-$ git checkout -b feature-backend-implementation
+$ git checkout -b feat-backend-implementation
 $ git checkout -b chore-minor-typo-fix
 ```
 
