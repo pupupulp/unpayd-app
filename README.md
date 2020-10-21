@@ -65,7 +65,17 @@ $ npm eject
 
 ## About
 
-### Contributing
+### Author
+
+**Eagan Martin**
+- [Github](https://github.com/pupupulp)
+- [LinkedIn]()
+
+### License
+
+Copyright © 2020, [Unpayd App](https://github.com/pupupulp/unpayd-app). Release under the [The Unlicense](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
+
+## Contributing
 
 Pull requests and stars are always welcome. For bugs and feature requests, please [create an issue](https://github.com/pupupulp/unpayd-app/issues/new).
 
@@ -123,18 +133,6 @@ $ git push origin <branch-name>
 9. Wait for respose on the Pull Request issued. 
 
 10. Congratulations you just contributed to opensource!
-
-### Contributors
-
-### Author
-
-**Eagan Martin**
-- [Github](https://github.com/pupupulp)
-- [LinkedIn]()
-
-### License
-
-Copyright © 2020, [Eagan Martin](https://github.com/pupupulp). Release under the [The Unlicense](https://github.com/pupupulp/unpayd-app/blob/master/LICENSE)
 
 ## Contributors ✨
 
