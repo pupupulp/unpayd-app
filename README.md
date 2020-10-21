@@ -39,19 +39,19 @@ $ npm start
 - Starting expo for android
 
 ```
-$ npm android
+$ npm start android
 ```
 
 - Starting expo for ios
 
 ```
-$ npm ios
+$ npm start ios
 ```
 
 - Starting expo for web
 
 ```
-$ npm web
+$ npm start web
 ```
 
 - Stopping expo
